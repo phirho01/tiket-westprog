@@ -1,10 +1,4 @@
 {
     "private": true,
-    "type": "module",
-    "engines": {
-        "node": "24.x"
-    },
-    "scripts": {
-        "build": "echo 'Laravel build skipped'"
-    }
+    "type": "module"
 }
