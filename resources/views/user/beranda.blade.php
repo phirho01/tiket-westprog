@@ -103,10 +103,10 @@
             </div>
         </div>
 
-        <div class="absolute inset-0 opacity-40">
+        <div class="absolute inset-0 opacity-85">
             <div class="w-full h-full bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA2lQPWyRzonCSC_qaBvVoorIevcyCp-bTIpcSUmv39_vsaKqfTA-zrnm4lrcJHHygEPuyHCSETABrhzPNoz6SYWDOqeBG5SRukw9dIzbq7C7SscEIqqnujoGZIjllcDBtoiGb65VDgbJpWXIV1avwccwU8y_v-ZVtti1068pWTfxtHhwR-VVEpsYmyVKrS3AK9qCUJbg7Rli5vly8iz2zjSW9W_qJoMq3Cu84m1TONy-Z6qrxgiM6RUHrGEX7RMu1yhc79VkEb29Sy')"></div>
         </div>
-        <div class="absolute inset-0 bg-gradient-to-r from-primary via-primary/85 to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-emerald-950/90 via-emerald-900/50 to-emerald-950/20"></div>
         
         <div class="relative z-20 w-full max-w-container-max mx-auto px-margin-desktop py-stack-lg">
             <div class="max-w-2xl text-on-primary">
