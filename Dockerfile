@@ -1,23 +1,34 @@
-FROM php:8.1-cli
+FROM php:8.1-apache
 
+# Install dependencies and PostgreSQL extensions
 RUN apt-get update && apt-get install -y \
     libpq-dev \
     git \
     unzip \
     libzip-dev \
-    nodejs \
-    npm \
     && docker-php-ext-install pdo pdo_pgsql zip
 
-WORKDIR /app
+# Enable Apache Mod_Rewrite
+RUN a2enmod rewrite
 
+# Set Working Directory
+WORKDIR /var/www/html
+
+# Copy project files
 COPY . .
 
+# Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN composer install --no-dev --optimize-autoloader
-RUN npm install && npm run build
 
-ENV PORT 8000
-EXPOSE 8000
+# Set Apache Document Root to /public
+ENV APACHE_DOCUMENT_ROOT /var/www/html/public
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/conf-available/*.conf
 
-CMD ["sh", "-c", "php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=${PORT:-8000}"]
+# Set permissions
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+
+EXPOSE 80
+
+CMD ["apache2-foreground"]
