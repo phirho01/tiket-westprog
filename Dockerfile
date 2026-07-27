@@ -1,4 +1,4 @@
-FROM php:8.1-apache
+FROM php:8.1-cli
 
 # Install system dependencies, Node.js, NPM & PostgreSQL extensions
 RUN apt-get update && apt-get install -y \
@@ -10,13 +10,8 @@ RUN apt-get update && apt-get install -y \
     npm \
     && docker-php-ext-install pdo pdo_pgsql zip
 
-# Enable Apache Mod_Rewrite
-RUN a2enmod rewrite
+WORKDIR /app
 
-# Set Working Directory
-WORKDIR /var/www/html
-
-# Copy project files
 COPY . .
 
 # Install Composer dependencies
@@ -26,15 +21,10 @@ RUN composer install --no-dev --optimize-autoloader
 # Build Vite Frontend Assets
 RUN npm install && npm run build
 
-# Set Apache Document Root to /public
-ENV APACHE_DOCUMENT_ROOT /var/www/html/public
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/conf-available/*.conf
+# Make entrypoint executable
+RUN chmod +x /app/entrypoint.sh
 
-# Set permissions
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
-RUN chmod +x /var/www/html/entrypoint.sh
+ENV PORT 8000
+EXPOSE 8000
 
-EXPOSE 80
-
-CMD ["/var/www/html/entrypoint.sh"]
+CMD ["/app/entrypoint.sh"]

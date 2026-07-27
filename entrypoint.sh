@@ -3,4 +3,4 @@ php artisan config:clear
 php artisan route:clear
 php artisan view:clear
 php artisan migrate --force
-exec apache2-foreground
+php artisan serve --host=0.0.0.0 --port=${PORT:-8000}
