@@ -11,42 +11,50 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // 1. Seed user_account (Admin & Wisatawan)
-        if (DB::table('user_account')->where('email', 'admin@westprog.com')->count() == 0) {
-            DB::table('user_account')->insert([
-                [
-                    'nama' => 'Pengelola Kulon Progo',
-                    'email' => 'admin@westprog.com',
-                    'password' => Hash::make('admin123'),
-                    'no_hp' => '081234567890',
-                    'role' => 'admin',
-                ],
-                [
-                    'nama' => 'Budi Santoso',
-                    'email' => 'budi@gmail.com',
-                    'password' => Hash::make('password123'),
-                    'no_hp' => '089876543210',
-                    'role' => 'wisatawan',
-                ],
-                [
-                    'nama' => 'Siti Aminah',
-                    'email' => 'siti@gmail.com',
-                    'password' => Hash::make('password123'),
-                    'no_hp' => '081399887766',
-                    'role' => 'wisatawan',
-                ],
-                [
-                    'nama' => 'Andi Pratama',
-                    'email' => 'andi@gmail.com',
-                    'password' => Hash::make('password123'),
-                    'no_hp' => '085712345678',
-                    'role' => 'wisatawan',
-                ],
-            ]);
+        $users = [
+            [
+                'id_user' => 1,
+                'nama' => 'Pengelola Kulon Progo',
+                'email' => 'admin@westprog.com',
+                'password' => Hash::make('admin123'),
+                'no_hp' => '081234567890',
+                'role' => 'admin',
+            ],
+            [
+                'id_user' => 2,
+                'nama' => 'Budi Santoso',
+                'email' => 'budi@gmail.com',
+                'password' => Hash::make('password123'),
+                'no_hp' => '089876543210',
+                'role' => 'wisatawan',
+            ],
+            [
+                'id_user' => 3,
+                'nama' => 'Siti Aminah',
+                'email' => 'siti@gmail.com',
+                'password' => Hash::make('password123'),
+                'no_hp' => '081399887766',
+                'role' => 'wisatawan',
+            ],
+            [
+                'id_user' => 4,
+                'nama' => 'Andi Pratama',
+                'email' => 'andi@gmail.com',
+                'password' => Hash::make('password123'),
+                'no_hp' => '085712345678',
+                'role' => 'wisatawan',
+            ],
+        ];
+
+        foreach ($users as $u) {
+            DB::table('user_account')->updateOrInsert(
+                ['email' => $u['email']],
+                $u
+            );
         }
 
         // 2. Seed Wisata (Exact Kulon Progo Destinations)
-        DB::table('wisata')->delete();
-        DB::table('wisata')->insert([
+        $wisataItems = [
             [
                 'id_wisata' => 1,
                 'nama_wisata' => 'Kalibiru',
@@ -107,31 +115,39 @@ class DatabaseSeeder extends Seeder
                 'jam_buka' => '07:00:00',
                 'jam_tutup' => '17:00:00',
             ],
-        ]);
+        ];
+
+        foreach ($wisataItems as $w) {
+            DB::table('wisata')->updateOrInsert(
+                ['id_wisata' => $w['id_wisata']],
+                $w
+            );
+        }
 
         // 3. Seed Ulasan
-        DB::table('ulasan')->delete();
         $budi = DB::table('user_account')->where('email', 'budi@gmail.com')->value('id_user');
         $siti = DB::table('user_account')->where('email', 'siti@gmail.com')->value('id_user');
 
         if ($budi) {
-            DB::table('ulasan')->insert([
-                'id_user' => $budi,
-                'id_wisata' => 1,
-                'rating' => 5,
-                'komentar' => 'Pemandangannya sangat memukau dan spot fotonya keren banget! Sangat direkomendasikan.',
-                'tanggal_ulasan' => now(),
-            ]);
+            DB::table('ulasan')->updateOrInsert(
+                ['id_user' => $budi, 'id_wisata' => 1],
+                [
+                    'rating' => 5,
+                    'komentar' => 'Pemandangannya sangat memukau dan spot fotonya keren banget! Sangat direkomendasikan.',
+                    'tanggal_ulasan' => now(),
+                ]
+            );
         }
 
         if ($siti) {
-            DB::table('ulasan')->insert([
-                'id_user' => $siti,
-                'id_wisata' => 2,
-                'rating' => 5,
-                'komentar' => 'Suasana dan udaranya sejuk sekali, cocok untuk piknik keluarga di akhir pekan.',
-                'tanggal_ulasan' => now(),
-            ]);
+            DB::table('ulasan')->updateOrInsert(
+                ['id_user' => $siti, 'id_wisata' => 2],
+                [
+                    'rating' => 5,
+                    'komentar' => 'Suasana dan udaranya sejuk sekali, cocok untuk piknik keluarga di akhir pekan.',
+                    'tanggal_ulasan' => now(),
+                ]
+            );
         }
     }
 }
