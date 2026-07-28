@@ -27,4 +27,4 @@ RUN chmod +x /app/entrypoint.sh
 ENV PORT 8000
 EXPOSE 8000
 
-CMD ["/app/entrypoint.sh"]
+CMD ["sh", "/app/entrypoint.sh"]
