@@ -65,12 +65,12 @@ return [
 
         'pgsql' => [
             'driver' => 'pgsql',
-            'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
+            'url' => env('DATABASE_URL', 'postgresql://postgres:NjjPnTHpIweJbasWjOeCMoRKneOBayHr@postgres.railway.internal:5432/railway'),
+            'host' => env('DB_HOST', 'postgres.railway.internal'),
             'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'database' => env('DB_DATABASE', 'railway'),
+            'username' => env('DB_USERNAME', 'postgres'),
+            'password' => env('DB_PASSWORD', 'NjjPnTHpIweJbasWjOeCMoRKneOBayHr'),
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
