@@ -3,7 +3,6 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Session\TokenMismatchException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -26,12 +25,6 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {
             //
-        });
-
-        // Penanganan Otomatis Jika Sesi / Token CSRF Kedaluwarsa:
-        // Langsung arahkan pengguna ke Landing Page (Beranda) secara mulus tanpa menampilkan layar error 419
-        $this->renderable(function (TokenMismatchException $e, $request) {
-            return redirect()->route('beranda')->with('sukses', 'Sesi Anda telah diperbarui. Silakan melanjutkan penjelajahan.');
         });
     }
 }

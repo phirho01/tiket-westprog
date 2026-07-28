@@ -29,7 +29,7 @@ Route::get('/daftar', [AuthController::class, 'tampilkanDaftar'])->name('daftar'
 Route::post('/daftar', [AuthController::class, 'prosesDaftar'])->name('daftar.proses');
 Route::get('/lupa-password', [AuthController::class, 'tampilkanLupaPassword'])->name('lupa_password');
 Route::post('/lupa-password', [AuthController::class, 'prosesLupaPassword'])->name('lupa_password.proses');
-Route::match(['get', 'post'], '/keluar', [AuthController::class, 'keluar'])->name('keluar');
+Route::post('/keluar', [AuthController::class, 'keluar'])->name('keluar');
 
 // Rute Terproteksi Pengguna (Wajib Login untuk Detail Wisata, Pemesanan, E-Tiket, & Batal 10 Menit)
 Route::middleware(['auth'])->group(function () {
