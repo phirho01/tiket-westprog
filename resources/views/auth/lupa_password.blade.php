@@ -3,9 +3,17 @@
 @section('judul', 'Lupa Kata Sandi - Westprog Ticket')
 
 @section('konten')
-<div class="max-w-md mx-auto py-16 px-4">
+<div class="relative min-h-[calc(100vh-140px)] flex items-center justify-center py-12 px-4 overflow-hidden">
+    <!-- Scenery Background Layer with Soft Opacity -->
+    <div class="absolute inset-0 z-0 pointer-events-none">
+        <div class="w-full h-full bg-cover bg-center opacity-30 filter blur-[1px] transform scale-105" 
+             style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA2lQPWyRzonCSC_qaBvVoorIevcyCp-bTIpcSUmv39_vsaKqfTA-zrnm4lrcJHHygEPuyHCSETABrhzPNoz6SYWDOqeBG5SRukw9dIzbq7C7SscEIqqnujoGZIjllcDBtoiGb65VDgbJpWXIV1avwccwU8y_v-ZVtti1068pWTfxtHhwR-VVEpsYmyVKrS3AK9qCUJbg7Rli5vly8iz2zjSW9W_qJoMq3Cu84m1TONy-Z6qrxgiM6RUHrGEX7RMu1yhc79VkEb29Sy')">
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-br from-emerald-950/40 via-surface-container-lowest/60 to-emerald-900/30 backdrop-blur-[2px]"></div>
+    </div>
+
     <!-- Card Form Lupa Kata Sandi -->
-    <div class="bg-surface-container-lowest rounded-3xl p-8 border border-outline-variant shadow-xl space-y-6">
+    <div class="relative z-10 w-full max-w-md bg-surface-container-lowest/95 rounded-3xl p-8 border border-outline-variant/80 shadow-2xl space-y-6 backdrop-blur-md">
         <div class="text-center">
             <img src="{{ asset('images/logo_westprog.png') }}" 
                  alt="Logo Resmi Westprog Ticket" 
