@@ -65,12 +65,12 @@ return [
 
         'pgsql' => [
             'driver' => 'pgsql',
-            'url' => env('DATABASE_URL', 'postgresql://postgres:NjjPnTHpIweJbasWjOeCMoRKneOBayHr@postgres.railway.internal:5432/railway'),
-            'host' => env('DB_HOST', 'postgres.railway.internal'),
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'railway'),
+            'database' => env('DB_DATABASE', 'westprog_ticket'),
             'username' => env('DB_USERNAME', 'postgres'),
-            'password' => env('DB_PASSWORD', 'NjjPnTHpIweJbasWjOeCMoRKneOBayHr'),
+            'password' => env('DB_PASSWORD', 'okokok01'),
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
