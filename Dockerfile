@@ -21,10 +21,10 @@ RUN composer install --no-dev --optimize-autoloader
 # Build Vite Frontend Assets
 RUN npm install && npm run build
 
-# Make entrypoint executable
-RUN chmod +x /app/entrypoint.sh
+# Convert entrypoint line endings to Unix LF and make executable
+RUN sed -i 's/\r$//' /app/entrypoint.sh && chmod +x /app/entrypoint.sh
 
 ENV PORT 8000
 EXPOSE 8000
 
-CMD ["sh", "/app/entrypoint.sh"]
+CMD ["/app/entrypoint.sh"]
