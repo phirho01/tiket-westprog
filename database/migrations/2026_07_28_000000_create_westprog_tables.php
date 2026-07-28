@@ -8,6 +8,17 @@ return new class extends Migration
 {
     public function up(): void
     {
+        if (!Schema::hasTable('user_account')) {
+            Schema::create('user_account', function (Blueprint $table) {
+                $table->increments('id_user');
+                $table->string('nama');
+                $table->string('email')->unique();
+                $table->string('password');
+                $table->string('no_hp')->nullable();
+                $table->string('role')->default('wisatawan');
+            });
+        }
+
         if (!Schema::hasTable('wisata')) {
             Schema::create('wisata', function (Blueprint $table) {
                 $table->increments('id_wisata');
@@ -83,5 +94,6 @@ return new class extends Migration
         Schema::dropIfExists('pembayaran');
         Schema::dropIfExists('pemesanan');
         Schema::dropIfExists('wisata');
+        Schema::dropIfExists('user_account');
     }
 };

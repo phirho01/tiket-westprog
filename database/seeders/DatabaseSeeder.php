@@ -10,17 +10,15 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // 1. Seed Users (Admin & Wisatawan)
-        if (DB::table('users')->where('email', 'admin@westprog.com')->count() == 0) {
-            DB::table('users')->insert([
+        // 1. Seed user_account (Admin & Wisatawan)
+        if (DB::table('user_account')->where('email', 'admin@westprog.com')->count() == 0) {
+            DB::table('user_account')->insert([
                 [
                     'nama' => 'Pengelola Kulon Progo',
                     'email' => 'admin@westprog.com',
                     'password' => Hash::make('admin123'),
                     'no_hp' => '081234567890',
                     'role' => 'admin',
-                    'created_at' => now(),
-                    'updated_at' => now(),
                 ],
                 [
                     'nama' => 'Budi Santoso',
@@ -28,8 +26,6 @@ class DatabaseSeeder extends Seeder
                     'password' => Hash::make('password123'),
                     'no_hp' => '089876543210',
                     'role' => 'wisatawan',
-                    'created_at' => now(),
-                    'updated_at' => now(),
                 ],
                 [
                     'nama' => 'Siti Aminah',
@@ -37,8 +33,6 @@ class DatabaseSeeder extends Seeder
                     'password' => Hash::make('password123'),
                     'no_hp' => '081399887766',
                     'role' => 'wisatawan',
-                    'created_at' => now(),
-                    'updated_at' => now(),
                 ],
                 [
                     'nama' => 'Andi Pratama',
@@ -46,8 +40,6 @@ class DatabaseSeeder extends Seeder
                     'password' => Hash::make('password123'),
                     'no_hp' => '085712345678',
                     'role' => 'wisatawan',
-                    'created_at' => now(),
-                    'updated_at' => now(),
                 ],
             ]);
         }
@@ -115,8 +107,8 @@ class DatabaseSeeder extends Seeder
 
         // 3. Seed Ulasan
         if (DB::table('ulasan')->count() == 0) {
-            $budi = DB::table('users')->where('email', 'budi@gmail.com')->value('id');
-            $siti = DB::table('users')->where('email', 'siti@gmail.com')->value('id');
+            $budi = DB::table('user_account')->where('email', 'budi@gmail.com')->value('id_user');
+            $siti = DB::table('user_account')->where('email', 'siti@gmail.com')->value('id_user');
             $kalibiru = DB::table('wisata')->where('nama_wisata', 'Wisata Alam Kalibiru')->value('id_wisata');
             $sermo = DB::table('wisata')->where('nama_wisata', 'Waduk Sermo')->value('id_wisata');
 
